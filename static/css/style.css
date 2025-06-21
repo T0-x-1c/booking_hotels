@@ -1,5 +1,10 @@
 body{
-    background: #000;
+    background: #baf7ff;
     color: #f291e4;
     font-family: 'Courier New', Courier, monospace;
+}
+.room_list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
 }

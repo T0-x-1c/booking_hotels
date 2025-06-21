@@ -7,7 +7,7 @@ class TypeRoom(models.Model):
     description = models.TextField()
 
     def __str__(self):
-        return f'room: {self.title}'
+        return f'{self.title}'
     
 class Room(models.Model):
     number = models.PositiveIntegerField()
