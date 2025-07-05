@@ -1,11 +1,6 @@
-<!DOCTYPE html>
 {% extends 'base.html' %}
-<div class="container mt-4">
-    {% block content %}
-    <h1>BOOKING SITE</h1>
-    <div class="room_list">
-        {% for room in rooms %}
-        <div class="card" style="width: 18rem;">
+{% block content %}
+            <div class="card" style="width: 18rem;">
             <img src="{{room.image.url}}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">{{room.number}}</h5>
@@ -18,11 +13,14 @@
                     <span class="badge standard">стандарт</span>
                 {% endif %}
                 <br>
-                <a href="{% url 'booking-room' room.id%}" class="btn btn-primary">Go to reservation</a>
+                <a href="#" class="btn btn-primary">Go to reservation</a>
             </div>
             </div>
-            {% empty %}    
-                <p>no rooms</p>
-            {% endfor %}
-    </div>
-    {% endblock %}
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-success">Забронювати</button>
+                </div>
+            </form>
+{% endblock  %}
