@@ -8,3 +8,134 @@ body{
     flex-wrap: wrap;
     gap: 20px;
 }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 2rem;
+    color: #212529;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #b388eb;
+    font-weight: 600;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: #6c757d;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.room-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 0 2rem;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 1rem;
+}
+
+.card-body h3 {
+    margin-top: 0;
+    font-size: 1.25rem;
+    color: #343a40;
+}
+
+.price {
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+    color: #17a2b8;
+}
+
+.badge {
+    display: inline-block;
+    background-color: #ffeeba;
+    color: #856404;
+    padding: 0.25rem 0.75rem;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.35rem 0.75rem;
+    border-radius: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    margin: 0.5rem 0;
+}
+
+/* Люкс — жовтий */
+.badge.luks {
+    background-color: #ffe066;
+    color: #856404;
+}
+
+/* Стандарт — зелений */
+.badge.standard {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+/* Економ — синій */
+.badge.economy {
+    background-color: #cce5ff;
+    color: #004085;
+}
+
+form input, form select {
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+form label {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    display: block;
+}
+

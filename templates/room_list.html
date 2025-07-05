@@ -3,7 +3,6 @@
 <div class="container mt-4">
     {% block content %}
     <h1>BOOKING SITE</h1>
-    <h3>rooms:</h3>
     <div class="room_list">
         {% for room in rooms %}
         <div class="card" style="width: 18rem;">
@@ -11,7 +10,16 @@
             <div class="card-body">
                 <h5 class="card-title">{{room.number}}</h5>
                 <p class="card-text">Price: {{room.price}}₴ </p>
-                <p class="card-text"></p><button type="button" class="btn btn-outline-warning">{{room.type_room}}</button></p>
+                {% if room.type_room_id == 1 %}
+                    <span class="badge luks">люкс</span>
+                {% endif %}
+                {% if room.type_room_id == 2 %}
+                    <span class="badge economy">економ</span>
+                {% endif %}
+                {% if room.type_room_id == 3 %}
+                    <span class="badge standard">стандарт</span>
+                {% endif %}
+                <br>
                 <a href="#" class="btn btn-primary">Go to reservation</a>
             </div>
             </div>
