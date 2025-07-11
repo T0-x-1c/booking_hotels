@@ -41,3 +41,15 @@ class Booking(models.Model):
         ordering = ['date_creation','date_start','date_end']
         verbose_name = "Reservation"  
         verbose_name_plural = "Reservations"
+
+class Comment(models.Model):
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='comments')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Коментар від {self.user.username} до кімнати {self.room.number}'
+
+    class Meta:
+        ordering = ['-created_at']

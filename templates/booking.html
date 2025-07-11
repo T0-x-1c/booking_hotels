@@ -1,26 +1,71 @@
 {% extends 'base.html' %}
+
 {% block content %}
-            <div class="card" style="width: 18rem;">
-            <img src="{{room.image.url}}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">{{room.number}}</h5>
-                <p class="card-text">Price: {{room.price}}₴ </p>
-                {% if room.type_room_id == 1 %}
-                    <span class="badge luks">люкс</span>
-                {% elif room.type_room_id == 2 %}
-                    <span class="badge economy">економ</span>
-                {% elif room.type_room_id == 3 %}
-                    <span class="badge standard">стандарт</span>
-                {% endif %}
-                <br>
-                <a href="#" class="btn btn-primary">Go to reservation</a>
-            </div>
-            </div>
-            <form action="" method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-success">Забронювати</button>
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <!-- 🖼️ Фото кімнати -->
+            <div class="card shadow-sm mb-4">
+                <img src="{{ room.image.url }}" class="card-img-top" alt="{{ room.number }}"
+                    style="max-height: 400px; object-fit: cover;">
+                <div class="card-body">
+                    <h2 class="card-title text-primary">Кімната №{{ room.number }}</h2>
+                    <p class="card-text">{{ room.description }}</p>
+                    <p class="card-text fw-bold text-success">Ціна: {{ room.price }}₴ / ніч</p>
                 </div>
-            </form>
-{% endblock  %}
+            </div>
+
+            <!-- 🟩 Форма бронювання -->
+            <div class="card shadow-sm p-4 mb-4">
+                <h4 class="mb-3">Бронювання</h4>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="d-grid">
+                        <button type="submit" name="reserve" class="btn btn-success">Забронювати</button>
+                    </div>
+                </form>
+                <div class="text-center mt-4">
+                    <a href="{% url 'room-list' %}" class="btn btn-outline-secondary">
+                        ⬅ Повернутись на головну
+                    </a>
+                </div>
+            </div>
+
+            <!-- 💬 Коментарі -->
+            <div class="card shadow-sm p-4 mb-4">
+                <h4 class="mb-3">Коментарі</h4>
+                {% if comments %}
+                    {% for comment in comments %}
+                        <div class="mb-3 border-bottom pb-2">
+                            <strong>{{ comment.user.username }}</strong>
+                            <small class="text-muted">{{ comment.created_at|date:"d.m.Y H:i" }}</small>
+                            <p class="mb-0">{{ comment.text }}</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-muted">Коментарів ще немає.</p>
+                {% endif %}
+            </div>
+
+            <!-- ✏️ Форма додавання коментаря -->
+            <div class="card shadow-sm p-4">
+                <h5 class="mb-3">Залишити коментар</h5>
+                {% if user.is_authenticated %}
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ comment_form.as_p }}
+                        <div class="d-grid">
+                            <button type="submit" name="comment" class="btn btn-primary">Надіслати</button>
+                        </div>
+                    </form>
+                {% else %}
+                    <p>Щоб залишити коментар, <a href="{% url 'login' %}">увійдіть у свій акаунт</a>.</p>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
