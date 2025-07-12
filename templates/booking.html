@@ -21,11 +21,33 @@
                 <h4 class="mb-3">Бронювання</h4>
                 <form method="post">
                     {% csrf_token %}
-                    {{ form.as_p }}
+
+                    <div class="mb-3">
+                        <label for="id_date_start" class="form-label">Дата заїзду</label>
+                        <input type="datetime-local" name="date_start" required class="form-control" id="id_date_start">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="id_date_end" class="form-label">Дата виїзду</label>
+                        <input type="datetime-local" name="date_end" required class="form-control" id="id_date_end">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="id_phone" class="form-label">Телефон</label>
+                        <input type="text" name="phone" required class="form-control" id="id_phone">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="id_persons" class="form-label">Кількість осіб</label>
+                        <input type="number" name="persons" min="1" value="1" required class="form-control"
+                            id="id_persons">
+                    </div>
+
                     <div class="d-grid">
                         <button type="submit" name="reserve" class="btn btn-success">Забронювати</button>
                     </div>
                 </form>
+
                 <div class="text-center mt-4">
                     <a href="{% url 'room-list' %}" class="btn btn-outline-secondary">
                         ⬅ Повернутись на головну
@@ -33,19 +55,20 @@
                 </div>
             </div>
 
+
             <!-- 💬 Коментарі -->
             <div class="card shadow-sm p-4 mb-4">
                 <h4 class="mb-3">Коментарі</h4>
                 {% if comments %}
-                    {% for comment in comments %}
-                        <div class="mb-3 border-bottom pb-2">
-                            <strong>{{ comment.user.username }}</strong>
-                            <small class="text-muted">{{ comment.created_at|date:"d.m.Y H:i" }}</small>
-                            <p class="mb-0">{{ comment.text }}</p>
-                        </div>
-                    {% endfor %}
+                {% for comment in comments %}
+                <div class="mb-3 border-bottom pb-2">
+                    <strong>{{ comment.user.username }}</strong>
+                    <small class="text-muted">{{ comment.created_at|date:"d.m.Y H:i" }}</small>
+                    <p class="mb-0">{{ comment.text }}</p>
+                </div>
+                {% endfor %}
                 {% else %}
-                    <p class="text-muted">Коментарів ще немає.</p>
+                <p class="text-muted">Коментарів ще немає.</p>
                 {% endif %}
             </div>
 
@@ -53,15 +76,15 @@
             <div class="card shadow-sm p-4">
                 <h5 class="mb-3">Залишити коментар</h5>
                 {% if user.is_authenticated %}
-                    <form method="post">
-                        {% csrf_token %}
-                        {{ comment_form.as_p }}
-                        <div class="d-grid">
-                            <button type="submit" name="comment" class="btn btn-primary">Надіслати</button>
-                        </div>
-                    </form>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ comment_form.as_p }}
+                    <div class="d-grid">
+                        <button type="submit" name="comment" class="btn btn-primary">Надіслати</button>
+                    </div>
+                </form>
                 {% else %}
-                    <p>Щоб залишити коментар, <a href="{% url 'login' %}">увійдіть у свій акаунт</a>.</p>
+                <p>Щоб залишити коментар, <a href="{% url 'login' %}">увійдіть у свій акаунт</a>.</p>
                 {% endif %}
             </div>
 

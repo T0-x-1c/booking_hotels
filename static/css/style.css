@@ -1,8 +1,3 @@
-body{
-    background: #fafeff;
-    color: #e9b7e2;
-    font-family: 'Courier New', Courier, monospace;
-}
 .room_list{
     display: flex;
     flex-wrap: wrap;
